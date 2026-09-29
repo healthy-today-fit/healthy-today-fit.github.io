@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Healthy Today Fit</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="logo.png" alt="Healthy Today Fit Logo">
+                <img src="text.png" alt="Healthy Today Fit Logo">
+            </div>
+            <nav>
+                <button id="hamburgerBtn" class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="services.html">Programs</a></li>
+                    <li><a href="consultation-booking.html">Consultation</a></li>
+                    <li><a href="contact-us.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Secure Checkout</h1>
+            <p>Complete your wellness program enrollment</p>
+        </section>
+
+        <!-- Checkout Section -->
+        <section>
+            <!-- Left: Checkout Form -->
+            <div>
+                <h2>Order Summary & Details</h2>
+
+                <div class="info-box" id="orderDetails" style="margin-bottom: 30px;">
+                    <h4>Program Details</h4>
+                    <p><strong>Program Selected:</strong> <span id="programName">-</span></p>
+                    <p><strong>Duration:</strong> <span id="programDuration">-</span></p>
+                    <p><strong>Price:</strong> <span id="displayPrice">-</span></p>
+                </div>
+
+                <div class="card" style="margin-bottom: 30px;">
+                    <h4>Billing Information</h4>
+
+                    <form id="checkoutForm">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                            <small style="color: #666; font-size: 12px;">⚠️ This number will be used for <strong>all
+                                    further communication via
+                                    WhatsApp.</strong></small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="healthConcerns">Primary Health Concerns *</label>
+                            <textarea id="healthConcerns" name="healthConcerns"
+                                placeholder="e.g., Weight management, PCOS, Digestion issues, etc." required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Brief Description of Your Health Goals (Optional)</label>
+                            <textarea id="description" name="description"
+                                placeholder="Tell us about your health goals and what you hope to achieve..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                                <input type="checkbox" id="termsAgreement" name="termsAgreement"
+                                    style="width: auto; min-width: 20px; height: auto; min-height: 20px; margin-right: 10px; margin-top: 2px; cursor: pointer; flex-shrink: 0;">
+                                <span>
+                                    I agree to the <a href="terms-conditions.html"
+                                        style="color: var(--primary-color);">Terms &
+                                        Conditions</a> and understand that <a href="refund-policy.html"
+                                        style="color: var(--primary-color);">once the program starts, no refunds are
+                                        possible</a>. I
+                                    also understand that this is a wellness program and not a substitute for medical
+                                    treatment.
+                                </span>
+                            </label>
+                        </div>
+
+                        <div id="errorMessage" class="error-message"></div>
+                        <div id="successMessage" class="success-message">
+                            Order placed successfully! We will connect with you shortly via WhatsApp.
+                        </div>
+
+                        <button type="button" id="paymentBtn" class="btn btn-primary"
+                            style="width: 100%; padding: 15px; font-size: 18px; margin-top: 20px;">Proceed to
+                            Payment</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Healthy Today Fit</h4>
+                <p>Personalized Health & Lifestyle Transformation</p>
+                <p style="margin-top: 15px;">Dr. Vasudha, Ph.D</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Information</h4>
+                <p>📧 Email: <a href="mailto:healthytoday.dr.vasudha@gmail.com">healthytoday.dr.vasudha@gmail.com</a>
+                </p>
+                <p>📱 WhatsApp: <a href="https://wa.me/917483644571">+91 7483644571</a> (Chat Support Only)</p>
+                <p>📍 Address: #002, BDS Layout, RK Hegde Nagar, Bengaluru, Karnataka 560077</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <p><a href="terms-conditions.html">Terms & Conditions</a></p>
+                <p><a href="refund-policy.html">Refund & Cancellation Policy</a></p>
+                <p><a href="grievance-support.html">Customer Support</a></p>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Healthy Today Fit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Get program details from URL parameters
+        function loadProgramDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const programType = urlParams.get('plan'); // 1month, 2month, 3month
+
+            const programs = {
+                '1-month': {
+                    name: '1-Month Wellness Program',
+                    duration: '30 Days',
+                    priceText: 'Rs. 3,000',
+                    price: 3000
+                },
+                '2-month': {
+                    name: '2-Month Wellness Program',
+                    duration: '60 Days',
+                    priceText: 'Rs. 5,000',
+                    price: 5000
+                },
+                '3-month': {
+                    name: '3-Month Wellness Program',
+                    duration: '90 Days',
+                    priceText: 'Rs. 7,500',
+                    price: 7500
+                }
+            };
+
+            if (programType && programs[programType]) {
+                const prog = programs[programType];
+                document.getElementById('programName').textContent = prog.name;
+                document.getElementById('programDuration').textContent = prog.duration;
+                document.getElementById('displayPrice').textContent = prog.priceText;
+
+                // Store program data for payment
+                window.selectedProgram = {
+                    type: programType,
+                    ...prog
+                };
+            } else {
+                document.getElementById('orderDetails').innerHTML = '<p style="color: var(--text-light);">No program selected. Please <a href="services.html">select a program first</a>.</p>';
+                document.getElementById('paymentBtn').disabled = true;
+            }
+        }
+
+        // Payment handling
+        document.getElementById('paymentBtn').addEventListener('click', function (e) {
+            e.preventDefault();
+
+            document.getElementById('errorMessage').style.display = 'none'
+
+            if (!document.getElementById('termsAgreement').checked) {
+                document.getElementById('errorMessage').textContent = 'Please accept the Terms & Conditions to proceed';
+                document.getElementById('errorMessage').style.display = 'block';
+                return;
+            }
+
+            const form = document.getElementById('checkoutForm');
+            if (!form.checkValidity()) {
+                document.getElementById('errorMessage').textContent = 'Please fill all required fields';
+                document.getElementById('errorMessage').style.display = 'block';
+                return;
+            }
+
+            // Get form data
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                phone: document.getElementById('phone').value,
+                program: window.selectedProgram
+            };
+
+            // Razorpay payment options
+            // Note: Replace 'YOUR_RAZORPAY_KEY_ID' with actual Razorpay Key ID
+            const options = {
+                key: 'YOUR_RAZORPAY_KEY_ID', // Replace with actual key
+                amount: window.selectedProgram.price,
+                currency: 'INR',
+                name: 'Healthy Today Fit',
+                description: window.selectedProgram.name,
+                image: 'logo.png',
+                prefill: {
+                    name: formData.fullName,
+                    contact: formData.phone
+                },
+                handler: function (response) {
+                    console.log('Payment successful:', response);
+
+                    // Send order data to server
+                    fetch('/api/create-program-order', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            ...formData,
+                            paymentId: response.razorpay_payment_id,
+                            orderId: response.razorpay_order_id
+                        })
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                document.getElementById('successMessage').style.display = 'block';
+                                document.getElementById('paymentBtn').disabled = true;
+                                setTimeout(() => {
+                                    window.location.href = 'index.html?orderSuccess=true';
+                                }, 6000);
+                            } else {
+                                throw new Error(data.message || 'Order creation failed');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Order error:', error);
+                            document.getElementById('errorMessage').textContent = 'Payment successful but order creation failed. Please contact support.';
+                            document.getElementById('errorMessage').style.display = 'block';
+                        });
+                },
+                modal: {
+                    ondismiss: function () {
+                        document.getElementById('errorMessage').textContent = 'Payment cancelled. Please try again.';
+                        document.getElementById('errorMessage').style.display = 'block';
+                    }
+                }
+            };
+
+            const rzp = new Razorpay(options);
+            rzp.open();
+        });
+
+        // Load program details on page load
+        window.addEventListener('load', loadProgramDetails);
+    </script>
+    <script>
+        // Mobile menu toggle
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburgerBtn.addEventListener('click', function () {
+            hamburgerBtn.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when link clicked
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                hamburgerBtn.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

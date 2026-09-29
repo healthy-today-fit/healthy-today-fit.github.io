@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Consultation - Healthy Today Fit</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="logo.png" alt="Healthy Today Fit Logo">
+                <img src="text.png" alt="Healthy Today Fit Logo">
+            </div>
+            <nav>
+                <button id="hamburgerBtn" class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="services.html">Programs</a></li>
+                    <li><a href="consultation-booking.html" class="active">Consultation</a></li>
+                    <li><a href="contact-us.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Book Your Consultation with Dr. Vasudha</h1>
+            <p>Get personalized guidance to start your wellness journey</p>
+        </section>
+
+        <!-- Introduction -->
+        <section>
+            <h2>One-on-One Consultation Call</h2>
+            <p>Get a 30-minute video or audio consultation call with Dr. Vasudha to discuss your health concerns,
+                understand your body type and individual needs, and explore how our personalized program can support
+                your wellness goals.</p>
+
+            <div class="info-box">
+                <strong>What to Expect</strong>
+                <ul style="margin-left: 20px;">
+                    <li><strong>After Booking:</strong> After successful booking, you will receive a booking details on
+                        WhatsApp within 30 minutes.</li>
+                    <li><strong>Cancellation or Rescheduling:</strong> If you need to cancel or reschedule your
+                        consultation after booking, please contact us through the same WhatsApp.</li>
+                    <li>Discuss your <strong>health concerns, goals</strong>, and initial health assessment.</li>
+                    <li><strong>Get personalized guidance</strong> on the right program and duration.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Booking Form & Details -->
+        <section>
+            <!-- Booking Form -->
+            <div>
+                <h3>Book Your Slot</h3>
+                <form id="consultationForm">
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                        <small style="color: #666; font-size: 12px;">This name will be used for all consultation
+                            details and future communication</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                        <small style="color: #666; font-size: 12px;">⚠️ This number will be used for <strong>all further
+                                communication via
+                                WhatsApp.</strong></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="healthConcerns">Primary Health Concerns *</label>
+                        <textarea id="healthConcerns" name="healthConcerns"
+                            placeholder="e.g., Weight management, PCOS, Digestion issues, etc." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Brief Description of Your Health Goals (Optional)</label>
+                        <textarea id="description" name="description"
+                            placeholder="Tell us about your health goals and what you hope to achieve..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="preferredDate">Preferred Date *</label>
+                        <input type="date" id="preferredDate" name="preferredDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="preferredTime">Preferred Time *</label>
+                        <select id="preferredTime" name="preferredTime" required>
+                            <option value="">-- Select Time Slot --</option>
+                            <option value="">Loading available slots...</option>
+                        </select>
+                        <small style="color: #666; font-size: 12px;">Times shown are based on Dr. Vasudha's
+                            availability</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="callType">Call Type *</label>
+                        <select id="callType" name="callType" required>
+                            <option value="">-- Select Call Type --</option>
+                            <option value="video">Video Call (Recommended)</option>
+                            <option value="audio">Audio Call</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                            <input type="checkbox" id="termsAgreement" name="termsAgreement"
+                                style="width: auto; min-width: 20px; height: auto; min-height: 20px; margin-right: 10px; margin-top: 2px; cursor: pointer; flex-shrink: 0;">
+                            <span>
+                                I have read and agree to the
+                                <a href="terms-conditions.html" target="_blank">Terms & Conditions</a>
+                                and
+                                <a href="refund-policy.html" target="_blank">Refund & Cancellation Policy</a>. I
+                                also understand that this is a wellness program and not a substitute for medical
+                                treatment.
+                            </span>
+                        </label>
+                    </div>
+
+                    <div id="successMessage" class="success-message">
+                        Consultation booked successfully! We’ll contact you shortly via WhatsApp
+                    </div>
+
+                    <div id="errorMessage" class="error-message"></div>
+
+                    <button type="button" id="proceedPaymentBtn" class="btn btn-primary"
+                        style="width: 100%; padding: 15px; font-size: 18px;">Proceed to Payment</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Important Information -->
+        <section>
+            <h2>Important Information</h2>
+            <div class="disclaimer">
+                <h4>⚠️ Disclaimer</h4>
+                <p><strong>This consultation is for wellness assessment and guidance only, not medical diagnosis or
+                        treatment.</strong> Dr. Vasudha is a wellness and nutrition specialist, not a medical doctor.
+                </p>
+                <p>If you have existing medical conditions, acute health concerns, or have been diagnosed with any
+                    disease, please consult with a qualified medical doctor before or during this consultation.</p>
+                <p>The consultation findings and recommendations should be considered as wellness guidance, not medical
+                    advice.</p>
+            </div>
+
+            <div class="info-box">
+                <h4>Before Your Consultation</h4>
+                <ul style="margin-left: 20px;">
+                    <li>Make sure you have a stable internet connection (for video calls)</li>
+                    <li>Find a quiet space for the call</li>
+                    <li>Have a pen and paper ready to take notes</li>
+                    <li>Prepare any relevant health records or symptoms to discuss</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section>
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>How do I choose between Video and Audio Call?</h3>
+            <p>Video calls are recommended as they allow for better assessment and discussion. However, if you're unable
+                to do a video call, audio is also available.</p>
+
+            <h3>What if I need to reschedule?</h3>
+            <p>You can reschedule your consultation by contacting us at least 24 hours in advance. <a
+                    href="contact-us.html">Click here to contact support</a>.</p>
+
+            <h3>What payment methods do you accept?</h3>
+            <p>We accept payments through Razorpay, which supports credit/debit cards, net banking, UPI, and digital
+                wallets.</p>
+
+            <h3>Is the consultation fee refundable?</h3>
+            <p>Yes, if you need to cancel within 24 hours before the scheduled consultation, you can request a refund.
+                For more details, please check our <a href="refund-policy.html">Refund Policy</a>.</p>
+
+            <h3>Will the consultation help me decide on a program?</h3>
+            <p>Absolutely! During the consultation, Dr. Vasudha will discuss your goals and recommend the most suitable
+                program duration (1-month, 2-month, or 3-month) for your specific needs.</p>
+
+            <h3>Do I need to prepare anything before the call?</h3>
+            <p>While preparation isn't mandatory, it's helpful to have information ready about your health concerns,
+                daily routine, current medications (if any), and specific health goals.</p>
+        </section>
+
+        <!-- CTA after booking info -->
+        <section class="hero"
+            style="background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);">
+            <h2 style="color: white; border: none;">Ready to Start Your Wellness Journey?</h2>
+            <p>Book your 30-minute consultation with Dr. Vasudha for just ₹99 and get personalized guidance for your
+                health goals.</p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Healthy Today Fit</h4>
+                <p>Personalized Health & Lifestyle Transformation</p>
+                <p style="margin-top: 15px;">Dr. Vasudha, Ph.D</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Information</h4>
+                <p>📧 Email: <a href="mailto:healthytoday.dr.vasudha@gmail.com">healthytoday.dr.vasudha@gmail.com</a>
+                </p>
+                <p>📱 WhatsApp: <a href="https://wa.me/917483644571">+91 7483644571</a> (Chat Support Only)</p>
+                <p>📍 Address: #002, BDS Layout, RK Hegde Nagar, Bengaluru, Karnataka 560077</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <p><a href="terms-conditions.html">Terms & Conditions</a></p>
+                <p><a href="refund-policy.html">Refund & Cancellation Policy</a></p>
+                <p><a href="grievance-support.html">Customer Support</a></p>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Healthy Today Fit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Load available time slots from API
+        function loadAvailableSlots() {
+            const dateInput = document.getElementById('preferredDate');
+            const timeSelect = document.getElementById('preferredTime');
+
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.setAttribute('min', today);
+
+            dateInput.addEventListener('change', function (e) {
+                const selectedDate = e.target.value;
+                if (selectedDate) {
+                    fetchAvailableSlots(selectedDate);
+                }
+            });
+
+            function fetchAvailableSlots(date) {
+                timeSelect.innerHTML = '<option value="">Loading available slots...</option>';
+
+                // API Call to get availability
+                fetch(`/api/consultation-availability?date=${date}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Could not fetch availability');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        timeSelect.innerHTML = '<option value="">-- Select Time Slot --</option>';
+
+                        if (data.slots && data.slots.length > 0) {
+                            data.slots.forEach(slot => {
+                                const option = document.createElement('option');
+                                option.value = slot.time;
+                                option.textContent = slot.displayTime + (slot.available ? '' : ' (Booked)');
+                                option.disabled = !slot.available;
+                                timeSelect.appendChild(option);
+                            });
+                        } else {
+                            const option = document.createElement('option');
+                            option.value = '';
+                            option.textContent = 'No slots available for this date';
+                            option.disabled = true;
+                            timeSelect.appendChild(option);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching slots:', error);
+                        timeSelect.innerHTML = '<option value="">-- Select Time Slot --</option>';
+                        const option = document.createElement('option');
+                        option.value = '';
+                        option.textContent = 'Unable to load slots. Please try again.';
+                        option.disabled = true;
+                        timeSelect.appendChild(option);
+                    });
+            }
+        }
+
+        // Handle payment
+        document.getElementById('proceedPaymentBtn').addEventListener('click', function (e) {
+            e.preventDefault();
+
+            document.getElementById('errorMessage').style.display = 'none';
+
+            if (!document.getElementById('termsAgreement').checked) {
+                document.getElementById('errorMessage').textContent = 'Please accept the Terms & Conditions to proceed';
+                document.getElementById('errorMessage').style.display = 'block';
+                return;
+            }
+
+            const form = document.getElementById('consultationForm');
+            if (!form.checkValidity()) {
+                document.getElementById('errorMessage').textContent = 'Please fill all required fields';
+                document.getElementById('errorMessage').style.display = 'block';
+                return;
+            }
+
+            // Get form data
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                phone: document.getElementById('phone').value,
+                healthConcerns: document.getElementById('healthConcerns').value,
+                description: document.getElementById('description').value,
+                preferredDate: document.getElementById('preferredDate').value,
+                preferredTime: document.getElementById('preferredTime').value,
+                callType: document.getElementById('callType').value,
+                amount: 99
+            };
+
+            // Razorpay payment options
+            const options = {
+                key: 'YOUR_RAZORPAY_KEY_ID', // Replace with actual Razorpay Key ID
+                amount: formData.amount,
+                currency: 'INR',
+                name: 'Healthy Today Fit',
+                description: '30-Minute Consultation with Dr. Vasudha',
+                image: 'logo.png',
+                prefill: {
+                    name: formData.fullName,
+                    contact: formData.phone
+                },
+                handler: function (response) {
+                    // Payment successful
+                    console.log('Payment successful:', response);
+
+                    // Send booking data to server
+                    fetch('/api/create-consultation-booking', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            ...formData,
+                            paymentId: response.razorpay_payment_id,
+                            orderId: response.razorpay_order_id
+                        })
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                document.getElementById('successMessage').style.display = 'block';
+                                document.getElementById('proceedPaymentBtn').disabled = true;
+                                // Optionally redirect or show confirmation
+                                setTimeout(() => {
+                                    window.location.href = 'index.html?orderSuccess=true';
+                                }, 6000);
+                            } else {
+                                throw new Error(data.message || 'Booking failed');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Booking error:', error);
+                            document.getElementById('errorMessage').textContent = 'Booking failed. Please retry.';
+                            document.getElementById('errorMessage').style.display = 'block';
+                        });
+                },
+                modal: {
+                    ondismiss: function () {
+                        document.getElementById('errorMessage').textContent = 'Payment cancelled. Please try again.';
+                        document.getElementById('errorMessage').style.display = 'block';
+                    }
+                }
+            };
+
+            const rzp = new Razorpay(options);
+            rzp.open();
+        });
+
+        // Load slots on page load
+        window.addEventListener('load', loadAvailableSlots);
+    </script>
+    <script>
+        // Mobile menu toggle
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburgerBtn.addEventListener('click', function () {
+            hamburgerBtn.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when link clicked
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                hamburgerBtn.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
