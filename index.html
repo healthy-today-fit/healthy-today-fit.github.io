@@ -1,168 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HealthyToday | Dr. Vasuth Udupa</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #263238;
-            background: #f7fbf9;
-        }
-
-        header {
-            background: #176b5b;
-            color: white;
-            padding: 20px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        header h1 {
-            font-size: 24px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 90px 20px;
-            background: #e4f5ef;
-        }
-
-        .hero h2 {
-            font-size: 42px;
-            color: #145c4e;
-            margin-bottom: 15px;
-        }
-
-        .hero p {
-            max-width: 650px;
-            margin: auto;
-            font-size: 18px;
-        }
-
-        .button {
-            display: inline-block;
-            margin-top: 25px;
-            padding: 12px 25px;
-            background: #176b5b;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-        }
-
-        section {
-            padding: 60px 8%;
-            text-align: center;
-        }
-
-        section h2 {
-            margin-bottom: 20px;
-            color: #145c4e;
-        }
-
-        .services {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            max-width: 280px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-        }
-
-        .card h3 {
-            margin-bottom: 10px;
-        }
-
-        footer {
-            background: #145c4e;
-            color: white;
-            text-align: center;
-            padding: 25px;
-        }
-    </style>
+    <title>Healthy Today Fit - Personalized Health & Wellness Program</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
-<header>
-    <h1>HealthyToday</h1>
-    <nav>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
-    </nav>
-</header>
-
-<section class="hero">
-    <h2>Healthier You, Starting Today</h2>
-    <p>
-        Personalized health coaching to help you build healthier habits,
-        improve your lifestyle, and achieve your wellness goals.
-    </p>
-    <a class="button" href="#contact">Book a Consultation</a>
-</section>
-
-<section id="about">
-    <h2>About Dr. Vasuth Udupa</h2>
-    <p>
-        Dr. Vasuth Udupa provides personalized health coaching focused on
-        practical, sustainable lifestyle changes and long-term wellbeing.
-    </p>
-</section>
-
-<section id="services">
-    <h2>Health Coaching</h2>
-
-    <div class="services">
-        <div class="card">
-            <h3>Personalized Coaching</h3>
-            <p>Individual guidance based on your health and lifestyle goals.</p>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="logo.png" alt="Healthy Today Fit Logo">
+                <img src="text.png" alt="Healthy Today Fit Logo">
+            </div>
+            <nav>
+                <button id="hamburgerBtn" class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul id="navMenu">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="services.html">Programs</a></li>
+                    <li><a href="consultation-booking.html">Consultation</a></li>
+                    <li><a href="contact-us.html">Contact</a></li>
+                </ul>
+            </nav>
         </div>
+    </header>
 
-        <div class="card">
-            <h3>Healthy Lifestyle</h3>
-            <p>Build sustainable habits around nutrition, activity and wellbeing.</p>
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Personalized Health & Lifestyle Transformation</h1>
+            <p>Discover a wellness program designed specifically for YOUR body, YOUR digestion, and YOUR goals</p>
+            <a href="consultation-booking.html" class="btn btn-secondary">Book Your Consultation - Rs. 99</a>
+        </section>
+
+        <!-- Introduction Section -->
+        <section>
+            <h2>Welcome to Healthy Today Fit</h2>
+            <p>Healthy Today Fit is a personalized health and lifestyle program designed to help you manage
+                lifestyle-related health concerns through customized nutrition, exercise, lifestyle changes, and
+                holistic wellness practices.</p>
+            <p>Our approach focuses on understanding <span class="highlight">your individual body, digestion, lifestyle,
+                    health condition, and goals</span> rather than following a generic diet plan.</p>
+
+            <div class="info-box">
+                <strong>Why Choose Our Program?</strong>
+                <p>Unlike one-size-fits-all diets, we create personalized plans based on your unique body type, gut
+                    type, health conditions, and lifestyle. With support from Dr. Vasudha Ph.D., you'll receive
+                    evidence-based guidance combining modern nutrition science with Ayurvedic and functional medicine
+                    principles.</p>
+            </div>
+        </section>
+
+        <!-- Program Video -->
+        <section>
+            <h2>Watch: The Program Explained by Dr. Vasudha, Ph.D.</h2>
+            <p>See how Healthy Today Fit works in detail.</p>
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; max-width: 800px; margin: 0 auto;">
+                <iframe src="https://www.youtube.com/embed/Sd2QtFzOjws"
+                    title="Healthy Today Fit program explained by Dr. Vasudha"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; border-radius: 8px;"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- Conditions We Support -->
+        <section>
+            <h2>Conditions We Support</h2>
+            <p>Our programs are designed around individual needs and may support concerns such as:</p>
+            <ul>
+                <li>Weight management and obesity</li>
+                <li>PCOD / PCOS</li>
+                <li>Diabetes / Blood sugar management</li>
+                <li>Thyroid-related concerns</li>
+                <li>Nutritional deficiencies</li>
+                <li>Digestive and gut-health concerns</li>
+                <li>IBS, bloating, and gastric issues</li>
+                <li>Hormonal imbalances</li>
+                <li>Perimenopause and menopause-related concerns</li>
+                <li>General health and lifestyle improvement</li>
+                <li>Healthy weight gain</li>
+            </ul>
+        </section>
+
+        <!-- Your Body is Unique -->
+        <section>
+            <h2>Your Body Is Unique</h2>
+            <p>Everyone's body is different, which is why the same diet or exercise routine may not work for everyone.
+            </p>
+            <p>Before creating your personalized plan, we consider your <span class="highlight">body type and gut
+                    type</span> and understand your lifestyle, food habits, daily routine, stress levels, health
+                conditions, and personal goals.</p>
+            <p>Our approach incorporates concepts from <span class="highlight">Ayurveda and functional medicine</span>,
+                including body-type assessment based on Vata, Pitta, and Kapha principles.</p>
+        </section>
+
+        <!-- Key Features -->
+        <section>
+            <h2>What We Offer</h2>
+            <div class="grid">
+                <div class="card">
+                    <h4>🥗 Customized Nutrition Plan</h4>
+                    <p>Based on your body type, gut type, health conditions, food preferences, and lifestyle. Simple,
+                        practical modifications to regular home-cooked food—no detox diets or extreme restrictions.</p>
+                </div>
+                <div class="card">
+                    <h4>🏃 Personalized Exercise Guidance</h4>
+                    <p>Exercise routines designed for your health condition and body type. We focus on appropriate
+                        physical activity rather than excessive or unsuitable exercise.</p>
+                </div>
+                <div class="card">
+                    <h4>🧘 Holistic Wellness Support</h4>
+                    <p>Including yoga, pranayama, breathwork, meditation, stress-management, and mindfulness practices.
+                        We address the connection between mind, brain, body, and emotional wellbeing.</p>
+                </div>
+                <div class="card">
+                    <h4>💊 Herbs & Supplements Guidance</h4>
+                    <p>Guidance on appropriate herbs and supplements based on identified nutritional deficiencies.
+                        Food-based nutrition remains central to our approach.</p>
+                </div>
+                <div class="card">
+                    <h4>💬 Ongoing Support</h4>
+                    <p>Daily WhatsApp guidance, weekly calls, recipe suggestions, progress tracking, and continued
+                        encouragement to help you implement your personalized plan.</p>
+                </div>
+                <div class="card">
+                    <h4>🌍 Holistic Health Approach</h4>
+                    <p>We consider nutrition, digestion, movement, lifestyle, stress, mind, and overall wellbeing to
+                        create sustainable health transformation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gut Health Approach -->
+        <section>
+            <h2>Personalized Gut-Health Approach</h2>
+            <p>Digestion and food tolerance can vary from person to person. Certain foods that are considered healthy
+                may still cause discomfort or digestive problems for some individuals.</p>
+            <p>Our assessment looks at your digestive patterns and individual needs so that your nutrition plan can be
+                customized accordingly.</p>
+            <p>Depending on your symptoms and assessment, areas such as IBS, bloating, digestive discomfort, and other
+                gut-related concerns may be considered while designing your plan.</p>
+        </section>
+
+        <!-- Program Duration -->
+        <section>
+            <h2>Program Duration & Investment</h2>
+            <p>Programs are available in different durations, depending on the individual's goals and requirements:</p>
+            <ul>
+                <li><strong>1-Month Program:</strong> For those starting their wellness journey</li>
+                <li><strong>2-Month Program:</strong> For deeper lifestyle changes</li>
+                <li><strong>3-Month Program:</strong> For comprehensive health transformation</li>
+            </ul>
+            <a href="services.html" class="btn btn-primary">View All Programs</a>
+            <p class="mt-20""><em>Some health goals may require a longer period for meaningful lifestyle changes. We recommend
+                    discussing your goals with Dr. Vasudha, Ph.D. by booking a consultation to determine the best
+                    program for you.</em></p>
+            <a href=" consultation-booking.html" class="btn btn-secondary">Book Consultation - Rs. 99</a>
+        </section>
+
+        <!-- Disclaimer -->
+        <section>
+            <div class="disclaimer">
+                <h4>⚠️ Important Disclaimer</h4>
+                <p><strong>Healthy Today Fit is a wellness and lifestyle program, not a substitute for medical
+                        treatment.</strong> This program is designed to support general health, fitness, and lifestyle
+                    improvement through nutrition and wellness practices.</p>
+                <p>For any existing medical conditions, acute health concerns, or medical diagnoses, please consult with
+                    a qualified medical doctor. If you are taking medications or have been diagnosed with any disease,
+                    kindly get your doctor's clearance before starting this program.</p>
+                <p>The guidance provided under this program is for educational and wellness purposes only and should not
+                    be considered as medical advice.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Healthy Today Fit</h4>
+                <p>Personalized Health & Lifestyle Transformation</p>
+                <p style="margin-top: 15px;">Dr. Vasudha, Ph.D.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Information</h4>
+                <p>📧 Email: <a href="mailto:healthytoday.dr.vasudha@gmail.com">healthytoday.dr.vasudha@gmail.com</a>
+                </p>
+                <p>📱 WhatsApp: <a href="https://wa.me/917483644571">+91 7483644571</a> (Chat Support Only)</p>
+                <p>📍 Address: #002, BDS Layout, RK Hegde Nagar, Bengaluru, Karnataka 560077
+                </p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <p><a href="terms-conditions.html">Terms & Conditions</a></p>
+                <p><a href="refund-policy.html">Refund & Cancellation Policy</a></p>
+                <p><a href="grievance-support.html">Customer Support</a></p>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Healthy Today Fit. All rights reserved.</p>
+            </div>
         </div>
+    </footer>
+    <script>
+        // Mobile menu toggle
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const navMenu = document.getElementById('navMenu');
 
-        <div class="card">
-            <h3>Wellness Goals</h3>
-            <p>Structured support to help you stay consistent and accountable.</p>
-        </div>
-    </div>
-</section>
+        hamburgerBtn.addEventListener('click', function () {
+            hamburgerBtn.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
 
-<section id="contact">
-    <h2>Start Your Health Journey</h2>
-    <p>Contact Dr. Vasuth Udupa to learn more about health coaching.</p>
-    <a class="button" href="mailto:your-email@example.com">Contact Us</a>
-</section>
-
-<footer>
-    <p>© 2026 HealthyToday · Dr. Vasuth Udupa</p>
-</footer>
-
+        // Close menu when link clicked
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                hamburgerBtn.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
 </body>
+
 </html>
