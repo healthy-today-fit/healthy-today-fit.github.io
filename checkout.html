@@ -29,6 +29,7 @@
                     <li><a href="services.html">Programs</a></li>
                     <li><a href="consultation-booking.html">Consultation</a></li>
                     <li><a href="contact-us.html">Contact</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
                 </ul>
             </nav>
         </div>
@@ -73,15 +74,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="healthConcerns">Primary Health Concerns *</label>
+                            <label for="healthConcerns">Primary Health Concerns</label>
                             <textarea id="healthConcerns" name="healthConcerns"
-                                placeholder="e.g., Weight management, PCOS, Digestion issues, etc." required></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="description">Brief Description of Your Health Goals (Optional)</label>
-                            <textarea id="description" name="description"
-                                placeholder="Tell us about your health goals and what you hope to achieve..."></textarea>
+                                placeholder="e.g., Weight management, PCOS, Digestion issues, etc."></textarea>
                         </div>
 
                         <div class="form-group">
@@ -208,14 +203,15 @@
             const formData = {
                 fullName: document.getElementById('fullName').value,
                 phone: document.getElementById('phone').value,
-                program: window.selectedProgram
+                program: window.selectedProgram,
+                healthConcerns: document.getElementById('healthConcerns').value,
             };
 
             // Razorpay payment options
             // Note: Replace 'YOUR_RAZORPAY_KEY_ID' with actual Razorpay Key ID
             const options = {
-                key: 'YOUR_RAZORPAY_KEY_ID', // Replace with actual key
-                amount: window.selectedProgram.price,
+                key: 'rzp_test_TNHfhvGYFwwYwv', // Replace with actual key
+                amount: window.selectedProgram.price * 100,
                 currency: 'INR',
                 name: 'Healthy Today Fit',
                 description: window.selectedProgram.name,
@@ -224,38 +220,13 @@
                     name: formData.fullName,
                     contact: formData.phone
                 },
+                notes: {
+                    "payee": normalizePhone(formData.phone),
+                    "order": `Name: ${formData.fullName}, plan: ${formData.program}, issue: ${formData.healthConcerns}`,
+                },
                 handler: function (response) {
-                    console.log('Payment successful:', response);
-
-                    // Send order data to server
-                    fetch('/api/create-program-order', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            ...formData,
-                            paymentId: response.razorpay_payment_id,
-                            orderId: response.razorpay_order_id
-                        })
-                    })
-                        .then(res => res.json())
-                        .then(data => {
-                            if (data.success) {
-                                document.getElementById('successMessage').style.display = 'block';
-                                document.getElementById('paymentBtn').disabled = true;
-                                setTimeout(() => {
-                                    window.location.href = 'index.html?orderSuccess=true';
-                                }, 6000);
-                            } else {
-                                throw new Error(data.message || 'Order creation failed');
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Order error:', error);
-                            document.getElementById('errorMessage').textContent = 'Payment successful but order creation failed. Please contact support.';
-                            document.getElementById('errorMessage').style.display = 'block';
-                        });
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('paymentBtn').disabled = true;
                 },
                 modal: {
                     ondismiss: function () {
@@ -268,6 +239,22 @@
             const rzp = new Razorpay(options);
             rzp.open();
         });
+
+        function normalizePhone(phoneNumber) {
+            let phone = phoneNumber.replace(/\D/g, "");
+
+            // Remove leading 0
+            if (phone.startsWith("0")) {
+                phone = phone.substring(1);
+            }
+
+            // 10 digits = Indian number without country code
+            if (phone.length === 10) {
+                phone = "91" + phone;
+            }
+
+            return phone;
+        }
 
         // Load program details on page load
         window.addEventListener('load', loadProgramDetails);

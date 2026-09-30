@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Success Stories - Healthy Today Fit</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Gallery Specific Styles */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+            padding: 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(45, 122, 74, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-item-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item-overlay span {
+            color: white;
+            font-size: 24px;
+        }
+
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            z-index: 1001;
+        }
+
+        .lightbox-close:hover {
+            color: var(--accent-color);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: none;
+            user-select: none;
+            transition: background 0.3s ease;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        .lightbox-counter {
+            color: white;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-box h3 {
+            color: white;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .stat-box p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+        }
+
+        /* Responsive Gallery */
+        @media (max-width: 768px) {
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+
+            .gallery-item img {
+                height: 200px;
+            }
+
+            .lightbox-nav {
+                font-size: 24px;
+                padding: 8px 12px;
+            }
+
+            .lightbox-close {
+                font-size: 32px;
+                top: 10px;
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 10px;
+            }
+
+            .gallery-item img {
+                height: 150px;
+            }
+
+            .stats-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="logo.png" alt="Healthy Today Fit Logo">
+                <img src="text.png" alt="Healthy Today Fit Logo">
+            </div>
+            <nav>
+                <button id="hamburgerBtn" class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="services.html">Programs</a></li>
+                    <li><a href="consultation-booking.html">Consultation</a></li>
+                    <li><a href="contact-us.html">Contact</a></li>
+                    <li><a href="gallery.html" class="active">Gallery</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Client Success Stories</h1>
+            <p>Real transformations from our Healthy Today Fit community members</p>
+        </section>
+
+        <!-- Introduction -->
+        <section>
+            <h2>Transformation Journey</h2>
+            <p>These are real stories from our clients who have successfully transformed their health and lifestyle
+                through our personalized wellness programs. Each journey is unique, but they all share one thing in
+                common: commitment to sustainable change.</p>
+
+            <p>From weight management to improved digestion, hormonal balance, and overall wellness - our clients have
+                achieved remarkable results by following personalized guidance tailored to their individual body type,
+                gut health, and lifestyle needs.</p>
+
+            <div class="info-box">
+                <strong>✨ Your Transformation Starts Here</strong>
+                <p>Ready to join our community of successful transformations? Book a consultation with Dr. Vasudha to
+                    discuss your goals and start your personalized wellness journey today.</p>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section>
+            <h2>Our Impact</h2>
+            <div class="stats-section">
+                <div class="stat-box">
+                    <h3>100+</h3>
+                    <p>Successful Client Transformations</p>
+                </div>
+                <div class="stat-box">
+                    <h3>100%</h3>
+                    <p>Personalized Programs</p>
+                </div>
+                <div class="stat-box">
+                    <h3>1-3</h3>
+                    <p>Month Program Duration</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section>
+            <h2>Client Transformations Gallery</h2>
+            <p>Click on any image to view it in full size. Navigate through the gallery using the arrow buttons.</p>
+
+            <div class="gallery-container" id="galleryContainer">
+                <!-- Gallery items will be generated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Testimonial Section -->
+        <section>
+            <h2>What Our Clients Say</h2>
+            <div class="grid">
+                <div class="card">
+                    <h4>⭐⭐⭐⭐⭐ Personalized & Effective</h4>
+                    <p>"Unlike other programs, this one actually understands my body type and what works for me. The
+                        results have been amazing!"</p>
+                </div>
+                <div class="card">
+                    <h4>⭐⭐⭐⭐⭐ Life Changing Support</h4>
+                    <p>"The daily WhatsApp support and weekly calls made all the difference. Dr. Vasudha is genuinely
+                        invested in my success."</p>
+                </div>
+                <div class="card">
+                    <h4>⭐⭐⭐⭐⭐ Finally Sustainable</h4>
+                    <p>"No extreme diets, just practical changes to my regular food. After 3 months, this has become my
+                        lifestyle!"</p>
+                </div>
+                <div class="card">
+                    <h4>⭐⭐⭐⭐⭐ Digestion Issues Resolved</h4>
+                    <p>"My bloating and digestive issues are gone. The personalized nutrition plan addressed exactly what
+                        my body needed."</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="hero" style="background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);">
+            <h2 style="color: white; border: none;">Join Our Success Stories</h2>
+            <p>Your transformation could be next. Start your personalized wellness journey with Dr. Vasudha today.</p>
+            <a href="consultation-booking.html" class="btn btn-secondary">Book Your Consultation - Rs. 99</a>
+        </section>
+
+        <!-- Disclaimer -->
+        <section>
+            <div class="disclaimer">
+                <h4>⚠️ Important Disclaimer</h4>
+                <p><strong>Healthy Today Fit is a wellness program, not a medical service.</strong> The transformations
+                    shown in this gallery are results of personalized nutrition, exercise, and lifestyle guidance. Individual
+                    results vary based on adherence, lifestyle factors, and individual body constitution.</p>
+                <p>For any existing medical conditions, please consult with a qualified medical doctor before starting this
+                    program.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <button class="lightbox-nav lightbox-prev" onclick="prevImage()">&#10094;</button>
+        <div class="lightbox-content">
+            <img src="" alt="Gallery Image" class="lightbox-image" id="lightboxImage">
+        </div>
+        <button class="lightbox-nav lightbox-next" onclick="nextImage()">&#10095;</button>
+        <div class="lightbox-counter">
+            <span id="currentImageNum">1</span> / <span id="totalImages">37</span>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Healthy Today Fit</h4>
+                <p>Personalized Health & Lifestyle Transformation</p>
+                <p style="margin-top: 15px;">Dr. Vasudha, Ph.D.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Information</h4>
+                <p>📧 Email: <a href="mailto:healthytoday.dr.vasudha@gmail.com">healthytoday.dr.vasudha@gmail.com</a>
+                </p>
+                <p>📱 WhatsApp: <a href="https://wa.me/917483644571">+91 7483644571</a> (Chat Support Only)</p>
+                <p>📍 Address: #002, BDS Layout, RK Hegde Nagar, Bengaluru, Karnataka 560077</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <p><a href="terms-conditions.html">Terms & Conditions</a></p>
+                <p><a href="refund-policy.html">Refund & Cancellation Policy</a></p>
+                <p><a href="grievance-support.html">Customer Support</a></p>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Healthy Today Fit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentImageIndex = 0;
+        const totalImages = 37;
+
+        // Generate gallery items
+        function generateGallery() {
+            const galleryContainer = document.getElementById('galleryContainer');
+
+            for (let i = 1; i <= totalImages; i++) {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                galleryItem.onclick = () => openLightbox(i - 1);
+
+                const img = document.createElement('img');
+                img.src = `gallery/${i}.jpeg`;
+                img.alt = `Client Transformation ${i}`;
+                img.loading = 'lazy';
+
+                const overlay = document.createElement('div');
+                overlay.className = 'gallery-item-overlay';
+                overlay.innerHTML = '<span>👁️</span>';
+
+                galleryItem.appendChild(img);
+                galleryItem.appendChild(overlay);
+                galleryContainer.appendChild(galleryItem);
+            }
+
+            document.getElementById('totalImages').textContent = totalImages;
+        }
+
+        // Open lightbox
+        function openLightbox(index) {
+            currentImageIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+
+            lightboxImage.src = `gallery/${index + 1}.jpeg`;
+            document.getElementById('currentImageNum').textContent = index + 1;
+            lightbox.classList.add('active');
+        }
+
+        // Close lightbox
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        // Next image
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % totalImages;
+            const lightboxImage = document.getElementById('lightboxImage');
+            lightboxImage.src = `gallery/${currentImageIndex + 1}.jpeg`;
+            document.getElementById('currentImageNum').textContent = currentImageIndex + 1;
+        }
+
+        // Previous image
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + totalImages) % totalImages;
+            const lightboxImage = document.getElementById('lightboxImage');
+            lightboxImage.src = `gallery/${currentImageIndex + 1}.jpeg`;
+            document.getElementById('currentImageNum').textContent = currentImageIndex + 1;
+        }
+
+        // Close lightbox when clicking outside
+        window.onclick = function (event) {
+            const lightbox = document.getElementById('lightbox');
+            if (event.target === lightbox) {
+                closeLightbox();
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function (e) {
+            if (document.getElementById('lightbox').classList.contains('active')) {
+                if (e.key === 'ArrowRight') nextImage();
+                if (e.key === 'ArrowLeft') prevImage();
+                if (e.key === 'Escape') closeLightbox();
+            }
+        });
+
+        // Mobile menu toggle
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburgerBtn.addEventListener('click', function () {
+            hamburgerBtn.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when link clicked
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                hamburgerBtn.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Generate gallery on page load
+        window.addEventListener('load', generateGallery);
+    </script>
+</body>
+
+</html>

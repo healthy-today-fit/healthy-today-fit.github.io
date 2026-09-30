@@ -29,6 +29,7 @@
                     <li><a href="services.html">Programs</a></li>
                     <li><a href="consultation-booking.html" class="active">Consultation</a></li>
                     <li><a href="contact-us.html">Contact</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
                 </ul>
             </nav>
         </div>
@@ -53,7 +54,7 @@
                 <strong>What to Expect</strong>
                 <ul style="margin-left: 20px;">
                     <li><strong>After Booking:</strong> After successful booking, you will receive a booking details on
-                        WhatsApp within 30 minutes.</li>
+                        WhatsApp within 30 minutes. And you will be able to schedule your prefered time</li>
                     <li><strong>Cancellation or Rescheduling:</strong> If you need to cancel or reschedule your
                         consultation after booking, please contact us through the same WhatsApp.</li>
                     <li>Discuss your <strong>health concerns, goals</strong>, and initial health assessment.</li>
@@ -84,30 +85,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="healthConcerns">Primary Health Concerns *</label>
+                        <label for="healthConcerns">Primary Health Concerns</label>
                         <textarea id="healthConcerns" name="healthConcerns"
-                            placeholder="e.g., Weight management, PCOS, Digestion issues, etc." required></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="description">Brief Description of Your Health Goals (Optional)</label>
-                        <textarea id="description" name="description"
-                            placeholder="Tell us about your health goals and what you hope to achieve..."></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="preferredDate">Preferred Date *</label>
-                        <input type="date" id="preferredDate" name="preferredDate" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="preferredTime">Preferred Time *</label>
-                        <select id="preferredTime" name="preferredTime" required>
-                            <option value="">-- Select Time Slot --</option>
-                            <option value="">Loading available slots...</option>
-                        </select>
-                        <small style="color: #666; font-size: 12px;">Times shown are based on Dr. Vasudha's
-                            availability</small>
+                            placeholder="e.g., Weight management, PCOS, Digestion issues, etc."></textarea>
                     </div>
 
                     <div class="form-group">
@@ -319,17 +299,14 @@
                 fullName: document.getElementById('fullName').value,
                 phone: document.getElementById('phone').value,
                 healthConcerns: document.getElementById('healthConcerns').value,
-                description: document.getElementById('description').value,
-                preferredDate: document.getElementById('preferredDate').value,
-                preferredTime: document.getElementById('preferredTime').value,
                 callType: document.getElementById('callType').value,
                 amount: 99
             };
 
             // Razorpay payment options
             const options = {
-                key: 'YOUR_RAZORPAY_KEY_ID', // Replace with actual Razorpay Key ID
-                amount: formData.amount,
+                key: 'rzp_test_TNHfhvGYFwwYwv', // Replace with actual Razorpay Key ID
+                amount: formData.amount * 100,
                 currency: 'INR',
                 name: 'Healthy Today Fit',
                 description: '30-Minute Consultation with Dr. Vasudha',
@@ -338,40 +315,14 @@
                     name: formData.fullName,
                     contact: formData.phone
                 },
+                notes: {
+                    "payee": normalizePhone(formData.phone),
+                    "order": `Name: ${formData.fullName}, Consultation call: ${formData.callType}, issue: ${formData.healthConcerns}`,
+                },
                 handler: function (response) {
                     // Payment successful
-                    console.log('Payment successful:', response);
-
-                    // Send booking data to server
-                    fetch('/api/create-consultation-booking', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            ...formData,
-                            paymentId: response.razorpay_payment_id,
-                            orderId: response.razorpay_order_id
-                        })
-                    })
-                        .then(res => res.json())
-                        .then(data => {
-                            if (data.success) {
-                                document.getElementById('successMessage').style.display = 'block';
-                                document.getElementById('proceedPaymentBtn').disabled = true;
-                                // Optionally redirect or show confirmation
-                                setTimeout(() => {
-                                    window.location.href = 'index.html?orderSuccess=true';
-                                }, 6000);
-                            } else {
-                                throw new Error(data.message || 'Booking failed');
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Booking error:', error);
-                            document.getElementById('errorMessage').textContent = 'Booking failed. Please retry.';
-                            document.getElementById('errorMessage').style.display = 'block';
-                        });
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('proceedPaymentBtn').disabled = true;
                 },
                 modal: {
                     ondismiss: function () {
@@ -385,8 +336,21 @@
             rzp.open();
         });
 
-        // Load slots on page load
-        window.addEventListener('load', loadAvailableSlots);
+        function normalizePhone(phoneNumber) {
+            let phone = phoneNumber.replace(/\D/g, "");
+
+            // Remove leading 0
+            if (phone.startsWith("0")) {
+                phone = phone.substring(1);
+            }
+
+            // 10 digits = Indian number without country code
+            if (phone.length === 10) {
+                phone = "91" + phone;
+            }
+
+            return phone;
+        }
     </script>
     <script>
         // Mobile menu toggle
