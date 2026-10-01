@@ -217,64 +217,6 @@
     </footer>
 
     <script>
-        // Load available time slots from API
-        function loadAvailableSlots() {
-            const dateInput = document.getElementById('preferredDate');
-            const timeSelect = document.getElementById('preferredTime');
-
-            // Set minimum date to today
-            const today = new Date().toISOString().split('T')[0];
-            dateInput.setAttribute('min', today);
-
-            dateInput.addEventListener('change', function (e) {
-                const selectedDate = e.target.value;
-                if (selectedDate) {
-                    fetchAvailableSlots(selectedDate);
-                }
-            });
-
-            function fetchAvailableSlots(date) {
-                timeSelect.innerHTML = '<option value="">Loading available slots...</option>';
-
-                // API Call to get availability
-                fetch(`/api/consultation-availability?date=${date}`)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Could not fetch availability');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        timeSelect.innerHTML = '<option value="">-- Select Time Slot --</option>';
-
-                        if (data.slots && data.slots.length > 0) {
-                            data.slots.forEach(slot => {
-                                const option = document.createElement('option');
-                                option.value = slot.time;
-                                option.textContent = slot.displayTime + (slot.available ? '' : ' (Booked)');
-                                option.disabled = !slot.available;
-                                timeSelect.appendChild(option);
-                            });
-                        } else {
-                            const option = document.createElement('option');
-                            option.value = '';
-                            option.textContent = 'No slots available for this date';
-                            option.disabled = true;
-                            timeSelect.appendChild(option);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error fetching slots:', error);
-                        timeSelect.innerHTML = '<option value="">-- Select Time Slot --</option>';
-                        const option = document.createElement('option');
-                        option.value = '';
-                        option.textContent = 'Unable to load slots. Please try again.';
-                        option.disabled = true;
-                        timeSelect.appendChild(option);
-                    });
-            }
-        }
-
         // Handle payment
         document.getElementById('proceedPaymentBtn').addEventListener('click', function (e) {
             e.preventDefault();
